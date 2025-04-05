@@ -12,9 +12,12 @@ export default defineConfig({
   dialect: 'sqlite', 
   dbCredentials: {
     // Use DATABASE_URL for SQLite connection string (e.g., "file:./dev.db")
-    // Use DATABASE_URL for SQLite connection string (e.g., "file:./dev.db")
     // biome-ignore lint: Forbidden non-null assertion.
-    url: process.env.DATABASE_URL!,
+    url: process.env.DATABASE_URL!, 
   },
-  // Driver and migrations options removed as they caused type errors and might not be needed for basic file SQLite.
+  // Add driver specific options if needed for SQLite, e.g., migrations table
+  driver: 'turso', // Drizzle Kit requires a driver for SQLite, 'turso' is common for local file-based SQLite
+  migrations: {
+     table: '_migrations' // Optional: specify migrations table name
+  }
 });

@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
-import Database from 'better-sqlite3'; // Import better-sqlite3 directly
+import { createConnection } from './connection';
 
 config({
   path: '.env.local',
@@ -12,9 +12,9 @@ const runMigrate = async () => {
     throw new Error('DATABASE_URL is not defined');
   }
 
-  // Directly use better-sqlite3 with DATABASE_URL
-  const sqlite = new Database(process.env.DATABASE_URL);
-  const db = drizzle(sqlite);
+  // Use the SQLite connection instead of postgres
+  const connection = createConnection();
+  const db = drizzle(connection);
 
   console.log('⏳ Running migrations...');
 
