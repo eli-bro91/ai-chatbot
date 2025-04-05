@@ -15,10 +15,6 @@ export const user = pgTable('User', {
   id: uuid('id').primaryKey().notNull().defaultRandom(),
   email: varchar('email', { length: 64 }).notNull(),
   password: varchar('password', { length: 64 }),
-  // Add new fields for persona, language, and premium status
-  persona: varchar('persona', { length: 32 }).default('Mentor'), // Default persona
-  preferredLanguage: varchar('preferredLanguage', { length: 5 }).default('en'), // Default to English (e.g., 'en', 'bs', 'hr', 'sr')
-  isPremium: boolean('isPremium').default(false), // Default to false
 });
 
 export type User = InferSelectModel<typeof user>;
@@ -60,9 +56,6 @@ export const message = pgTable('Message_v2', {
   parts: json('parts').notNull(),
   attachments: json('attachments').notNull(),
   createdAt: timestamp('createdAt').notNull(),
-  // Add new fields for language and emotion analysis
-  language: varchar('language', { length: 5 }), // Store the language of this specific message (e.g., 'en', 'bs')
-  emotionalAnalysis: json('emotionalAnalysis'), // Store Hume AI results (or similar) as JSON
 });
 
 export type DBMessage = InferSelectModel<typeof message>;

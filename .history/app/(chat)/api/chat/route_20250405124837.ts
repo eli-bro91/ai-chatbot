@@ -75,9 +75,6 @@ export async function POST(request: Request) {
           parts: userMessage.parts,
           attachments: userMessage.experimental_attachments ?? [],
           createdAt: new Date(),
-          // Add default null values for new fields
-          language: null, 
-          emotionalAnalysis: null,
         },
       ],
     });
@@ -139,9 +136,6 @@ export async function POST(request: Request) {
                       attachments:
                         assistantMessage.experimental_attachments ?? [],
                       createdAt: new Date(),
-                      // Add default null values for new fields
-                      language: null, 
-                      emotionalAnalysis: null,
                     },
                   ],
                 });

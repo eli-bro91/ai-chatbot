@@ -37,17 +37,12 @@ export const regularPrompt =
 export const systemPrompt = ({
   selectedChatModel,
 }: {
-  selectedChatModel: string; // This will now be 'gemini-1.5-pro' or 'gemini-1.5-flash'
+  selectedChatModel: string;
 }) => {
-  // Let's assume Gemini Pro is the more advanced/reasoning model for now
-  // and doesn't need the specific artifacts prompt initially.
-  // We can refine this logic later based on model capabilities or persona selection.
-  if (selectedChatModel === 'gemini-1.5-pro') {
-    // Potentially a more complex or reasoning-focused base prompt for Pro
-    return regularPrompt; // Keep it simple for now
+  if (selectedChatModel === 'chat-model-reasoning') {
+    return regularPrompt;
   } else {
-    // For Flash or other models, include artifact instructions if needed
-    return `${regularPrompt}\n\n${artifactsPrompt}`; // Keep artifacts prompt for Flash
+    return `${regularPrompt}\n\n${artifactsPrompt}`;
   }
 };
 

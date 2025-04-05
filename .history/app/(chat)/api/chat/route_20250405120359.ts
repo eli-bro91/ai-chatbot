@@ -75,9 +75,6 @@ export async function POST(request: Request) {
           parts: userMessage.parts,
           attachments: userMessage.experimental_attachments ?? [],
           createdAt: new Date(),
-          // Add default null values for new fields
-          language: null, 
-          emotionalAnalysis: null,
         },
       ],
     });
@@ -88,13 +85,11 @@ export async function POST(request: Request) {
           model: myProvider.languageModel(selectedChatModel),
           system: systemPrompt({ selectedChatModel }),
           messages,
-          maxSteps: 5, // Keep maxSteps or adjust as needed for Gemini
-          // Update the condition to use the new Gemini model ID for the "reasoning" model
+          maxSteps: 5,
           experimental_activeTools:
-            selectedChatModel === 'gemini-1.5-pro' // Assuming Pro is the reasoning model for now
-              ? [] // Disable tools for the Pro model initially, can be adjusted later
+            selectedChatModel === 'chat-model-reasoning'
+              ? []
               : [
-                  // Enable tools for Flash and potentially other future models
                   'getWeather',
                   'createDocument',
                   'updateDocument',
@@ -139,9 +134,6 @@ export async function POST(request: Request) {
                       attachments:
                         assistantMessage.experimental_attachments ?? [],
                       createdAt: new Date(),
-                      // Add default null values for new fields
-                      language: null, 
-                      emotionalAnalysis: null,
                     },
                   ],
                 });
